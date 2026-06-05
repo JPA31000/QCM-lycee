@@ -258,6 +258,13 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
 ];
   var TOTAL = QUESTIONS.length;
 
+  // Les sliders sont écrits du « positif » vers le « négatif ». Comme l'échelle
+  // de couleurs va désormais du rouge (gauche) au vert (droite), on retourne
+  // l'ordre des libellés une seule fois au chargement : le côté négatif tombe
+  // sur le rouge, le côté positif sur le vert. (La valeur stockée reste le
+  // libellé choisi, donc le PDF et les données ne changent pas.)
+  QUESTIONS.forEach(function(q){ if(q.type === "slider" && Array.isArray(q.options)) q.options.reverse(); });
+
   // ====== ÉTAT ======
   var state = {
     view: "intro",      // intro | question | thankyou
