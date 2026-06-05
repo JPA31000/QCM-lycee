@@ -101,10 +101,18 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
   {
     id: "normalisation",
     section: "Situations observées",
-    question: "5. Selon toi, certaines remarques ou blagues concernant les filles, les garçons ou l'apparence sont-elles considérées comme normales ou « pour rire » dans le lycée ?",
+    question: "5. Certaines remarques ou blagues concernant les filles ou les garçons (apparence, ...) sont-elles considérées comme banales dans le lycée ?",
     type: "slider",
     options: ["Jamais", "Une ou deux fois dans l'année", "Quelques fois dans l'année", "Environ une fois par mois", "Plusieurs fois par mois"],
     optOut: "Je ne sais pas",
+  },
+  {
+    id: "genre",
+    section: "Situations observées",
+    question: "Quel est ton genre ?",
+    type: "single",
+    otherLabel: "Je me définis autrement",
+    options: ["Femme", "Homme", "Non binaire", "Autre", "Je préfère ne pas répondre"],
   },
   {
     id: "vu_entendu",
@@ -148,7 +156,7 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
   {
     id: "reaction_temoins",
     section: "Réactions et soutien",
-    question: "10. Quand un élève est témoin d'une situation qui met quelqu'un mal à l'aise, les autres élèves réagissent-ils ?",
+    question: "10. Dans une situation qui met quelqu'un mal à l'aise, peut-il compter sur l'aide des autres élèves ?",
     type: "slider",
     options: ["Oui souvent", "Parfois", "Rarement", "Jamais"],
     optOut: "Je ne sais pas",
@@ -200,13 +208,16 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
       "Professeur",
       "CPE",
       "Infirmier / infirmière",
+      "Assistante sociale",
       "Assistant d'éducation (AED)",
+      "Assistant de prévention et de sécurité (APS)",
       "Psychologue scolaire / conseiller d'orientation",
       "Association extérieure / éducateur",
       "Proviseur",
       "Coordonnateur ULIS",
       "DDFPT",
       "Référent PHARE",
+      "CDI",
       "Autre",
     ],
   },
@@ -360,6 +371,7 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
 
     var lastSection = "";
     QUESTIONS.forEach(function(q){
+      if(q.id === "lesquelles" && answers["connait_ressources"] === "Non") return;
       var ans = formatAnswer(q, answers[q.id]);
       var ansLines = q.type === "grid" ? ans.split("\n") : doc.splitTextToSize(ans, contentW - 14);
       var qLines = doc.splitTextToSize(q.question, contentW - 12);
@@ -473,14 +485,14 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
 
   // ====== ÉCHELLE COULEUR ======
   function scaleColor(t){
-    var stops = [[34,197,94],[132,204,22],[234,179,8],[249,115,22],[239,68,68]];
+    var stops = [[239,68,68],[249,115,22],[234,179,8],[132,204,22],[34,197,94]];
     var x = Math.max(0, Math.min(1, t)) * (stops.length - 1);
     var i = Math.min(stops.length - 2, Math.floor(x));
     var f = x - i;
     var c = stops[i].map(function(a, k){ return Math.round(a + (stops[i+1][k] - a) * f); });
     return "rgb(" + c[0] + "," + c[1] + "," + c[2] + ")";
   }
-  var SCALE_EMOJIS = ["😊","🙂","😐","😕","😟"];
+  var SCALE_EMOJIS = ["😟","😕","😐","🙂","😊"];
 
   // ====== OPTION « AUTRE » ======
   var OTHER = "Autre";
@@ -564,7 +576,7 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
     return '<div style="padding:.5rem .25rem .25rem">' +
       '<div id="slHead" style="text-align:center;margin-bottom:2rem;min-height:4rem;display:flex;flex-direction:column;align-items:center;justify-content:center">' + head + '</div>' +
       '<div id="slTrack" style="position:relative;padding:10px 0;opacity:' + (optOutSel ? .35 : 1) + ';transition:opacity .2s">' +
-        '<div id="slSpectrum" style="height:8px;border-radius:99px;background:linear-gradient(to right,#22c55e,#84cc16,#eab308,#f97316,#ef4444);opacity:' + (onScale ? 1 : .3) + ';transition:opacity .2s"></div>' +
+        '<div id="slSpectrum" style="height:8px;border-radius:99px;background:linear-gradient(to right,#ef4444,#f97316,#eab308,#84cc16,#22c55e);opacity:' + (onScale ? 1 : .3) + ';transition:opacity .2s"></div>' +
         '<div id="slFilled" style="position:absolute;top:10px;left:' + pct + '%;right:0;height:8px;border-radius:0 99px 99px 0;background:#ece5df;display:' + (onScale ? "block" : "none") + '"></div>' +
         '<input type="range" id="sliderRange" min="0" max="' + (n - 1) + '" value="' + (onScale ? idx : Math.floor((n - 1) / 2)) + '" class="slider-input">' +
         '<div id="slThumb" style="position:absolute;top:50%;left:calc(' + (onScale ? pct : 50) + '% - 15px);transform:translateY(-50%);width:30px;height:30px;border-radius:50%;background:' + C + ';border:3px solid #fff;box-shadow:0 3px 12px rgba(0,0,0,.28);transition:left .1s,background .2s;pointer-events:none;z-index:1"></div>' +
@@ -604,7 +616,7 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
     q.options.forEach(function(opt){
       if(opt === OTHER){
         var sel = isOther(val);
-        h += '<div style="display:flex;flex-direction:column"><button class="opt-btn' + (sel ? " sel" : "") + '" data-act="other-single">Autre…</button>' + (sel ? otherInputHTML(otherTextOf(val)) : "") + '</div>';
+        h += '<div style="display:flex;flex-direction:column"><button class="opt-btn' + (sel ? " sel" : "") + '" data-act="other-single">' + esc(q.otherLabel || "Autre…") + '</button>' + (sel ? otherInputHTML(otherTextOf(val)) : "") + '</div>';
       } else {
         var s = val === opt;
         h += '<button class="opt-btn' + (s ? " sel" : "") + '" data-act="pick" data-val="' + attr(opt) + '">' + esc(opt) + '</button>';
@@ -689,9 +701,12 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
   function renderQuestion(){
     var q = QUESTIONS[state.step];
     var val = state.answers[q.id];
-    var current = state.step + 1;
+    var vis = visibleIndices();
+    var current = vis.indexOf(state.step) + 1;
+    var visTotal = vis.length;
     var ok = canContinue();
-    var isLast = state.step === TOTAL - 1;
+    var isLast = nextIndex(state.step) >= TOTAL;
+    var isFirst = prevIndex(state.step) < 0;
     var body = "";
     if(q.type === "slider") body = sliderHTML(q, val);
     else if(q.type === "single") body = singleHTML(q, val);
@@ -704,11 +719,11 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
       '<div class="screen screen--top" style="padding-top:clamp(1rem,4vw,2.5rem)">' +
         '<div class="card qcard" style="max-width:600px">' +
           '<div style="display:flex;justify-content:flex-end;margin-bottom:.4rem;min-height:1.1rem"><span id="savedInd" style="font-size:.75rem;color:#16a34a;font-weight:600">' + esc(state.savedMsg || "") + '</span></div>' +
-          progressHTML(current, TOTAL, q.section) +
+          progressHTML(current, visTotal, q.section) +
           '<h2 style="font-weight:600;font-size:clamp(1.2rem,4.2vw,1.4rem);color:#3c2a21;margin:1.4rem 0 1.6rem;line-height:1.4">' + esc(q.question) + '</h2>' +
           body +
           '<div style="display:flex;justify-content:space-between;margin-top:2rem;align-items:center;gap:.8rem">' +
-            '<button class="btn-pill" data-act="prev"' + (state.step === 0 ? " disabled" : "") + '>← Précédent</button>' +
+            '<button class="btn-pill" data-act="prev"' + (isFirst ? " disabled" : "") + '>← Précédent</button>' +
             '<button class="next-btn" id="nextBtn" data-act="next"' + (ok ? "" : " disabled") + '>' + (isLast ? "Envoyer ✓" : "Suivant →") + '</button>' +
           '</div>' +
         '</div>' +
@@ -797,13 +812,25 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
     if(resume){ var s = loadFromStorage(); if(s && s.answers) state.answers = s.answers; }
     state.view = "question"; state.step = 0; render();
   }
-  function goPrev(){ if(state.step > 0){ state.step--; render(); } }
+  // Saut conditionnel : la Q16 (« lesquels ? ») n'est posée que si l'élève
+  // a répondu autre chose que « Non » à la Q15 (« connais-tu... ? »).
+  function isSkipped(index){
+    var q = QUESTIONS[index];
+    if(q.id === "lesquelles") return state.answers["connait_ressources"] === "Non";
+    return false;
+  }
+  function nextIndex(from){ var i = from + 1; while(i < TOTAL && isSkipped(i)) i++; return i; }
+  function prevIndex(from){ var i = from - 1; while(i >= 0 && isSkipped(i)) i--; return i; }
+  function visibleIndices(){ var a = []; for(var i = 0; i < TOTAL; i++){ if(!isSkipped(i)) a.push(i); } return a; }
+
+  function goPrev(){ var p = prevIndex(state.step); if(p >= 0){ state.step = p; render(); } }
   function goNext(){
-    if(state.step === TOTAL - 1){
+    var n = nextIndex(state.step);
+    if(n >= TOTAL){
       state.view = "thankyou";
       if(!state.code) state.code = randomCode();
       state.send = "idle"; state.downloaded = false; render();
-    } else { state.step++; render(); }
+    } else { state.step = n; render(); }
   }
   function pick(val){ var q = QUESTIONS[state.step]; state.answers[q.id] = val; saveAndFlash(); render(); }
   function otherSingle(){
