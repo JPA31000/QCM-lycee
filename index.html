@@ -75,9 +75,17 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
     options: ["3PM", "CAP", "Bac professionnel seconde", "Bac professionnel première", "Bac professionnel terminale", "BTS", "DTMS", "Autre"],
   },
   {
+    id: "genre",
+    section: "Profil",
+    question: "2. Quel est ton genre ?",
+    type: "single",
+    otherLabel: "Je me définis autrement",
+    options: ["Femme", "Homme", "Non binaire", "Autre", "Je préfère ne pas répondre"],
+  },
+  {
     id: "securite",
     section: "Climat et sécurité",
-    question: "2. Te sens-tu globalement en sécurité dans le lycée ?",
+    question: "3. Te sens-tu globalement en sécurité dans le lycée ?",
     type: "slider",
     options: ["Oui toujours", "Souvent", "Parfois", "Rarement", "Jamais"],
     optOut: "Je préfère ne pas répondre",
@@ -85,7 +93,7 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
   {
     id: "relations",
     section: "Climat et sécurité",
-    question: "3. De manière générale, comment décrirais-tu les relations entre élèves dans le lycée ?",
+    question: "4. De manière générale, comment décrirais-tu les relations entre élèves dans le lycée ?",
     type: "slider",
     options: ["Très respectueuses", "Plutôt respectueuses", "Parfois tendues", "Souvent difficiles"],
     optOut: "Je ne sais pas",
@@ -93,7 +101,7 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
   {
     id: "lieux",
     section: "Climat et sécurité",
-    question: "4. Y a-t-il des lieux dans le lycée où certains élèves peuvent se sentir moins à l'aise ? (plusieurs réponses possibles)",
+    question: "5. Y a-t-il des lieux dans le lycée où certains élèves peuvent se sentir moins à l'aise ? (plusieurs réponses possibles)",
     type: "multi_with_none",
     noneOption: "Aucun lieu en particulier",
     options: ["Cantine", "Couloirs", "Cour", "En classe", "Toilettes", "Vestiaires", "Internat", "Abords du lycée", "Réseaux sociaux entre élèves", "Autre"],
@@ -101,23 +109,15 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
   {
     id: "normalisation",
     section: "Situations observées",
-    question: "5. Certaines remarques ou blagues concernant les filles ou les garçons (apparence, ...) sont-elles considérées comme banales dans le lycée ?",
+    question: "6. Certaines remarques ou blagues concernant les filles ou les garçons (apparence, ...) sont-elles considérées comme banales dans le lycée ?",
     type: "slider",
     options: ["Jamais", "Une ou deux fois dans l'année", "Quelques fois dans l'année", "Environ une fois par mois", "Plusieurs fois par mois"],
     optOut: "Je ne sais pas",
   },
   {
-    id: "genre",
-    section: "Situations observées",
-    question: "Quel est ton genre ?",
-    type: "single",
-    otherLabel: "Je me définis autrement",
-    options: ["Femme", "Homme", "Non binaire", "Autre", "Je préfère ne pas répondre"],
-  },
-  {
     id: "vu_entendu",
     section: "Situations observées",
-    question: "6. As-tu déjà vu ou entendu dans le lycée : (plusieurs réponses possibles)",
+    question: "7. As-tu déjà vu ou entendu dans le lycée : (plusieurs réponses possibles)",
     type: "multi_with_none",
     noneOption: "Aucune de ces situations",
     options: [
@@ -133,7 +133,7 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
   {
     id: "frequence",
     section: "Situations observées",
-    question: "7. Selon toi, ces situations arrivent :",
+    question: "8. Selon toi, ces situations arrivent :",
     type: "slider",
     options: ["Jamais", "Une ou deux fois dans l'année", "Quelques fois dans l'année", "Environ une fois par mois", "Plusieurs fois par mois", "Tous les jours"],
     optOut: "Je ne sais pas",
@@ -141,14 +141,14 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
   {
     id: "pression_amour",
     section: "Situations observées",
-    question: "8. Penses-tu que certains élèves peuvent subir une pression des autres concernant les relations amoureuses ?",
+    question: "9. Penses-tu que certains élèves peuvent subir une pression des autres concernant les relations amoureuses ?",
     type: "single",
     options: ["Jamais", "Une ou deux fois dans l'année", "Quelques fois dans l'année", "Environ une fois par mois", "Plusieurs fois par mois", "Je ne sais pas"],
   },
   {
     id: "reseaux",
     section: "Situations observées",
-    question: "9. Selon toi, les réseaux sociaux entre élèves peuvent-ils parfois être un lieu de moqueries, de rumeurs ou de pression ?",
+    question: "10. Selon toi, les réseaux sociaux entre élèves peuvent-ils parfois être un lieu de moqueries, de rumeurs ou de pression ?",
     type: "slider",
     options: ["Jamais", "Une ou deux fois dans l'année", "Quelques fois dans l'année", "Environ une fois par mois", "Plusieurs fois par mois"],
     optOut: "Je ne sais pas",
@@ -156,7 +156,7 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
   {
     id: "reaction_temoins",
     section: "Réactions et soutien",
-    question: "10. Dans une situation qui met quelqu'un mal à l'aise, peut-il compter sur l'aide des autres élèves ?",
+    question: "11. Dans une situation qui met quelqu'un mal à l'aise, peut-il compter sur l'aide des autres élèves ?",
     type: "slider",
     options: ["Oui souvent", "Parfois", "Rarement", "Jamais"],
     optOut: "Je ne sais pas",
@@ -164,7 +164,7 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
   {
     id: "demander_aide",
     section: "Réactions et soutien",
-    question: "11. Penses-tu qu'il est facile pour un élève de demander de l'aide dans ce type de situation ?",
+    question: "12. Penses-tu qu'il est facile pour un élève de demander de l'aide dans ce type de situation ?",
     type: "slider",
     options: ["Oui", "Plutôt oui", "Plutôt non", "Non"],
     optOut: "Je ne sais pas",
@@ -172,7 +172,7 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
   {
     id: "adultes_serieux",
     section: "Réactions et soutien",
-    question: "12. Penses-tu que les adultes du lycée (prof, vie scolaire, …) prennent ces situations au sérieux ?",
+    question: "13. Penses-tu que les adultes du lycée (prof, vie scolaire, …) prennent ces situations au sérieux ?",
     type: "slider",
     options: ["Oui", "Plutôt oui", "Plutôt non", "Non"],
     optOut: "Je ne sais pas",
@@ -180,7 +180,7 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
   {
     id: "cru_aide",
     section: "Réactions et soutien",
-    question: "13. Penses-tu qu'un élève qui parle d'une situation difficile sera cru et aidé par les adultes du lycée ?",
+    question: "14. Penses-tu qu'un élève qui parle d'une situation difficile sera cru et aidé par les adultes du lycée ?",
     type: "slider",
     options: ["Oui", "Plutôt oui", "Plutôt non", "Non"],
     optOut: "Je ne sais pas",
@@ -188,21 +188,21 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
   {
     id: "vers_qui",
     section: "Trouver de l'aide",
-    question: "14. Sais-tu vers quel adulte te tourner si toi ou un camarade avez un problème ?",
+    question: "15. Sais-tu vers quel adulte te tourner si toi ou un camarade avez un problème ?",
     type: "slider",
     options: ["Oui clairement", "Peut-être", "Non"],
   },
   {
     id: "connait_ressources",
     section: "Trouver de l'aide",
-    question: "15. Connais-tu des personnes ou des lieux qui peuvent aider un élève en difficulté ?",
+    question: "16. Connais-tu des personnes ou des lieux qui peuvent aider un élève en difficulté ?",
     type: "single",
     options: ["Oui", "Un peu", "Non"],
   },
   {
     id: "lesquelles",
     section: "Trouver de l'aide",
-    question: "16. Si oui, lesquels connais-tu ? (plusieurs réponses possibles)",
+    question: "17. Si oui, lesquels connais-tu ? (plusieurs réponses possibles)",
     type: "multi",
     options: [
       "Professeur",
@@ -224,7 +224,7 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
   {
     id: "parler_plus",
     section: "Pistes d'action",
-    question: "17. Penses-tu qu'il serait utile de parler davantage de ces sujets au lycée ?",
+    question: "18. Penses-tu qu'il serait utile de parler davantage de ces sujets au lycée ?",
     type: "slider",
     options: ["Oui", "Peut-être", "Non"],
     optOut: "Je ne sais pas",
@@ -232,7 +232,7 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
   {
     id: "actions",
     section: "Pistes d'action",
-    question: "18. Quelles actions pourraient être utiles au lycée ? (plusieurs réponses possibles)",
+    question: "19. Quelles actions pourraient être utiles au lycée ? (plusieurs réponses possibles)",
     type: "multi",
     options: [
       "Interventions d'associations",
@@ -252,7 +252,7 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif}
   {
     id: "idee",
     section: "Pistes d'action",
-    question: "19. Si tu le souhaites, tu peux écrire ici une idée pour améliorer le respect et le bien-être des élèves dans le lycée : (réponse libre)",
+    question: "20. Si tu le souhaites, tu peux écrire ici une idée pour améliorer le respect et le bien-être des élèves dans le lycée : (réponse libre)",
     type: "text",
   },
 ];
